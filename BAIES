@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Baie des Milliardaires Service | Conciergerie de Luxe</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316', 
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        },
+                        dark: '#0f172a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'wahoo': '0 20px 40px -15px rgba(249, 115, 22, 0.3)',
+                        'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #fafafa; }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-view {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInPage 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        .page-view.active { display: block; }
+
+        @keyframes fadeInPage {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #f97316;
+            transition: width 0.3s ease;
+        }
+        .nav-link.active::after, .nav-link:hover::after { width: 100%; }
+
+        .input-modern {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .input-modern:focus {
+            border-color: #f97316;
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+            outline: none;
+        }
+
+        .bento-card, .catalog-card {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+        }
+        @media (hover: hover) {
+            .bento-card:hover, .catalog-card:hover {
+                transform: translateY(-5px) scale(1.01);
+                box-shadow: 0 25px 50px -12px rgba(249, 115, 22, 0.15);
+            }
+        }
+
+        .filter-btn.active {
+            background-color: #0f172a;
+            color: white;
+            border-color: #0f172a;
+        }
+
+        /* Scrollbar styles for modal */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased selection:bg-brand-500 selection:text-white flex flex-col min-h-screen overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 md:h-24">
+                <!-- Logo -->
+                <a href="#" onclick="navigate('accueil')" class="flex items-center gap-3 group shrink-0">
+                    <img src="https://i.postimg.cc/FFxPsXst/Whats-App-Image-2026-04-14-at-17-36-58.jpg" alt="Logo Baie des Milliardaires" class="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl object-cover transform group-hover:scale-105 transition-transform shadow-wahoo">
+                    <div class="flex flex-col">
+                        <span class="font-display font-bold text-xl md:text-2xl text-dark leading-none">BAIE DES</span>
+                        <span class="font-display font-bold text-brand-500 text-sm md:text-lg leading-none">MILLIARDAIRES</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <button onclick="navigate('accueil')" class="nav-link active font-medium text-gray-600 hover:text-dark transition-colors" data-target="accueil">Accueil</button>
+                    <button onclick="navigate('apropos')" class="nav-link font-medium text-gray-600 hover:text-dark transition-colors" data-target="apropos">Notre Histoire</button>
+                    <button onclick="navigate('services')" class="nav-link font-medium text-gray-600 hover:text-dark transition-colors" data-target="services">Services</button>
+                    <button onclick="navigate('catalogue')" class="nav-link font-medium text-gray-600 hover:text-dark transition-colors" data-target="catalogue">Catalogue Hébergements</button>
+                    <button onclick="navigate('reservation')" class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-2xl font-semibold transition-all shadow-wahoo transform hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-plus"></i> Réserver
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-dark p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-2xl max-h-[calc(100vh-5rem)] overflow-y-auto">
+            <div class="px-4 py-6 flex flex-col gap-3">
+                <button onclick="navigate('accueil', true)" class="w-full text-left px-6 py-4 rounded-xl text-lg font-medium text-gray-800 hover:bg-brand-50 hover:text-brand-500 transition-colors">Accueil</button>
+                <button onclick="navigate('apropos', true)" class="w-full text-left px-6 py-4 rounded-xl text-lg font-medium text-gray-800 hover:bg-brand-50 hover:text-brand-500 transition-colors">Notre Histoire</button>
+                <button onclick="navigate('services', true)" class="w-full text-left px-6 py-4 rounded-xl text-lg font-medium text-gray-800 hover:bg-brand-50 hover:text-brand-500 transition-colors">Services</button>
+                <button onclick="navigate('catalogue', true)" class="w-full text-left px-6 py-4 rounded-xl text-lg font-medium text-gray-800 hover:bg-brand-50 hover:text-brand-500 transition-colors">Catalogue Hébergements</button>
+                <button onclick="navigate('reservation', true)" class="w-full text-center mt-4 bg-brand-500 text-white px-6 py-4 rounded-xl font-bold shadow-wahoo text-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calendar-plus"></i> Faire une Réservation
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow pt-24 md:pt-32">
+
+        <!-- ========================================== -->
+        <!-- PAGE 1: ACCUEIL -->
+        <!-- ========================================== -->
+        <section id="page-accueil" class="page-view active">
+            <div class="relative w-full px-4 sm:px-6 lg:px-8 mt-2 md:mt-6">
+                <div class="max-w-7xl mx-auto bg-dark rounded-3xl sm:rounded-[3rem] overflow-hidden relative min-h-[70vh] md:min-h-[80vh] flex items-center">
+                    <div class="absolute inset-0">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover opacity-40" alt="Vue d'une villa">
+                        <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/90 sm:via-dark/80 to-transparent"></div>
+                    </div>
+                    
+                    <div class="relative z-10 px-6 py-16 sm:px-12 md:px-20 max-w-4xl md:py-20">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/20 border border-brand-500/30 backdrop-blur-sm mb-6 md:mb-8">
+                            <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                            <span class="text-brand-100 font-medium text-xs sm:text-sm">Conciergerie & Événementiel Premium</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-white leading-[1.1] mb-6">
+                            L'Évasion Parfaite à la <br class="hidden sm:block"><span class="text-gradient">Baie des Milliardaires</span>
+                        </h1>
+                        <p class="text-base sm:text-lg md:text-xl text-gray-300 mb-8 md:mb-10 max-w-2xl font-light">
+                            Réservation de villas haut standing, organisation d'événements sur mesure et expériences exclusives au cœur du plus beau site touristique de Côte d'Ivoire.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="navigate('catalogue')" class="w-full sm:w-auto bg-brand-500 hover:bg-white hover:text-brand-500 text-white px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 flex justify-center items-center gap-3">
+                                Voir le catalogue <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                            <button onclick="navigate('services')" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-6 md:px-8 py-4 rounded-2xl font-semibold text-base md:text-lg transition-all duration-300 flex justify-center items-center">
+                                Explorer nos services
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 md:-mt-12 relative z-20 mb-20">
+                <div class="bg-white rounded-3xl shadow-soft p-6 sm:p-8 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+                    <div class="text-center p-2">
+                        <div class="text-3xl sm:text-4xl font-display font-bold text-brand-500 mb-1 sm:mb-2">2019</div>
+                        <div class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-widest">Création</div>
+                    </div>
+                    <div class="text-center p-2">
+                        <div class="text-3xl sm:text-4xl font-display font-bold text-brand-500 mb-1 sm:mb-2">6k+</div>
+                        <div class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-widest">Clients Actifs</div>
+                    </div>
+                    <div class="text-center p-2">
+                        <div class="text-3xl sm:text-4xl font-display font-bold text-brand-500 mb-1 sm:mb-2">30+</div>
+                        <div class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-widest">Complexes & Villas</div>
+                    </div>
+                    <div class="text-center p-2">
+                        <div class="text-3xl sm:text-4xl font-display font-bold text-brand-500 mb-1 sm:mb-2">28k</div>
+                        <div class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-widest">Abonnés</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PAGE 2: NOTRE HISTOIRE -->
+        <!-- ========================================== -->
+        <section id="page-apropos" class="page-view py-8 md:py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 md:mb-16">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mb-4">Notre <span class="text-gradient">Histoire</span></h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">De la vision d'un homme à l'agence de référence de la Baie des Milliardaires.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center mb-16 md:mb-20">
+                    <div class="relative px-4 sm:px-0 mt-8 sm:mt-0">
+                        <div class="absolute inset-0 bg-brand-500 rounded-3xl sm:rounded-[3rem] transform translate-x-3 translate-y-3 sm:translate-x-6 sm:translate-y-6"></div>
+                        <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80" alt="Plage et cocotiers" class="relative z-10 w-full h-[350px] sm:h-[450px] md:h-[600px] object-cover rounded-3xl sm:rounded-[3rem] shadow-2xl">
+                        
+                        <div class="absolute -bottom-6 left-8 right-8 sm:right-auto sm:left-auto sm:-left-8 sm:top-1/4 z-20 bg-white p-5 sm:p-6 rounded-2xl sm:rounded-3xl shadow-soft">
+                            <i class="fa-solid fa-quote-left text-3xl sm:text-4xl text-brand-500 mb-2"></i>
+                            <p class="font-display font-bold text-lg sm:text-xl text-dark">Promouvoir le<br>tourisme ivoirien.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-8 mt-8 lg:mt-0">
+                        <div>
+                            <span class="text-brand-500 font-bold tracking-widest uppercase text-xs sm:text-sm mb-2 block">Le Fondateur</span>
+                            <h3 class="text-3xl sm:text-4xl font-display font-bold text-dark mb-4 sm:mb-6">Franck Sonaye</h3>
+                            <p class="text-gray-600 leading-relaxed text-base sm:text-lg mb-4">
+                                Acteur local engagé et secrétaire adjoint de la Jeunesse de la Baie, Franck Sonaye a matérialisé son idée en octobre 2019. L'objectif ? Structurer l'offre touristique d'un site au potentiel mondial.
+                            </p>
+                            <p class="text-gray-600 leading-relaxed text-base sm:text-lg">
+                                Siégeant et vivant sur la Baie, notre ancrage local est notre plus grande force. Nous connaissons chaque villa, chaque partenaire et chaque besoin de nos visiteurs pour garantir une expérience sur-mesure.
+                            </p>
+                        </div>
+
+                        <div class="bg-brand-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-brand-100">
+                            <h4 class="font-display font-bold text-lg sm:text-xl text-dark mb-4">Nos Engagements</h4>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-brand-500 shrink-0"><i class="fa-solid fa-check"></i></div>
+                                    <p class="text-gray-700 text-sm sm:text-base mt-1 sm:mt-2"><strong>Fiabilité & Transparence :</strong> Tarification claire et rapidité de réservation.</p>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-brand-500 shrink-0"><i class="fa-solid fa-star"></i></div>
+                                    <p class="text-gray-700 text-sm sm:text-base mt-1 sm:mt-2"><strong>Excellence :</strong> Classé 1er sur le marché des porteurs d'affaires au plan local.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PAGE 3: SERVICES -->
+        <!-- ========================================== -->
+        <section id="page-services" class="page-view py-8 md:py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 md:mb-16">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mb-4">Nos <span class="text-gradient">Services</span></h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">Une conciergerie complète adaptée aux offres exclusives du catalogue.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[220px]">
+                    
+                    <!-- Hébergement -->
+                    <div class="bento-card md:col-span-2 md:row-span-2 bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 flex flex-col justify-between relative overflow-hidden group min-h-[300px] md:min-h-0">
+                        <div class="absolute inset-0 bg-brand-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" class="absolute right-0 bottom-0 w-2/3 md:w-1/2 h-[120%] object-cover rounded-tl-[4rem] opacity-10 md:opacity-20 group-hover:opacity-40 transition-opacity" alt="Villa premium">
+                        <div>
+                            <div class="w-14 h-14 sm:w-16 sm:h-16 bg-brand-500 rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 shadow-wahoo">
+                                <i class="fa-solid fa-house-chimney text-white text-xl sm:text-2xl"></i>
+                            </div>
+                            <h3 class="font-display text-2xl sm:text-3xl font-bold text-dark mb-4">Réservation de Villas<br>& Chambres d'Hôtel</h3>
+                        </div>
+                        <p class="text-gray-600 text-base sm:text-lg max-w-md relative z-10">
+                            Accès exclusif à plus de 30 villas privées, cabanons et complexes hôteliers (BBR, Romano, Sunday...). Sur la Baie, à Assinie ou Bassam.
+                        </p>
+                    </div>
+
+                    <!-- Evénements -->
+                    <div class="bento-card bg-dark rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[200px] md:min-h-0">
+                        <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-500 blur-3xl opacity-30"></div>
+                        <div class="relative z-10">
+                            <i class="fa-solid fa-champagne-glasses text-brand-500 text-3xl mb-4"></i>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Location d'Espace & Événements</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm relative z-10 mt-4 md:mt-0">
+                            Grands espaces comme Oz'atta ou Villa Frahmaed pour team building, mariages, anniversaires (jusqu'à 200 pers).
+                        </p>
+                    </div>
+
+                    <!-- Pass Journée -->
+                    <div class="bento-card bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 flex flex-col justify-between min-h-[200px] md:min-h-0">
+                        <div>
+                            <i class="fa-solid fa-sun text-brand-500 text-3xl mb-4"></i>
+                            <h3 class="font-display text-xl font-bold text-dark mb-2">Pass Journée & Loisirs</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm mt-4 md:mt-0">
+                            Profitez des buffets (BBR), balades en quad, cheval, jet ski, et activités lagunaires sans passer la nuit.
+                        </p>
+                    </div>
+
+                    <!-- Transport -->
+                    <div class="bento-card bg-brand-500 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-white shadow-wahoo min-h-[200px] md:min-h-0">
+                        <div>
+                            <i class="fa-solid fa-ship text-white text-3xl mb-4"></i>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Traversée & Transport</h3>
+                        </div>
+                        <p class="text-white/90 text-sm mt-4 md:mt-0">
+                            Organisation de vos traversées en bateau depuis Bietry, Yopougon Azito, ou navettes privées.
+                        </p>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="bento-card md:col-span-2 bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 flex flex-col justify-center gap-6 sm:gap-4 sm:flex-row sm:items-center sm:justify-between min-h-[200px] md:min-h-0">
+                        <div>
+                            <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-2">
+                                <i class="fa-solid fa-book-open text-brand-500 text-xl sm:text-2xl"></i>
+                                <h3 class="font-display text-xl sm:text-2xl font-bold text-dark">Découvrez toutes nos offres</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm sm:text-base">
+                                Explorez les détails, prix et photos de chaque établissement dans notre catalogue complet.
+                            </p>
+                        </div>
+                        <button onclick="navigate('catalogue')" class="shrink-0 w-full sm:w-auto text-center bg-dark text-white px-6 py-4 rounded-2xl font-bold hover:bg-brand-500 transition-colors">
+                            Voir le Catalogue
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PAGE 4: CATALOGUE DYNAMIQUE -->
+        <!-- ========================================== -->
+        <section id="page-catalogue" class="page-view py-8 md:py-12 bg-gray-50 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-10 md:mb-12">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mb-4">Catalogue <span class="text-gradient">Complet</span></h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">Découvrez l'intégralité de nos complexes, villas sur la baie et résidences exclusives (Plus de 30 offres).</p>
+                </div>
+
+                <!-- Filtres -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12">
+                    <button onclick="filterCatalog('all')" id="btn-filter-all" class="filter-btn active px-5 py-2.5 rounded-full border border-gray-300 font-medium text-sm transition-all hover:border-dark">Tous</button>
+                    <button onclick="filterCatalog('complexe')" id="btn-filter-complexe" class="filter-btn px-5 py-2.5 bg-white rounded-full border border-gray-300 text-gray-700 font-medium text-sm transition-all hover:border-dark">Complexes Hôteliers (Baie)</button>
+                    <button onclick="filterCatalog('villa-baie')" id="btn-filter-villa-baie" class="filter-btn px-5 py-2.5 bg-white rounded-full border border-gray-300 text-gray-700 font-medium text-sm transition-all hover:border-dark">Villas Privées (Baie)</button>
+                    <button onclick="filterCatalog('villa-autre')" id="btn-filter-villa-autre" class="filter-btn px-5 py-2.5 bg-white rounded-full border border-gray-300 text-gray-700 font-medium text-sm transition-all hover:border-dark">Villas (Assinie/Bassam/Abidjan)</button>
+                </div>
+
+                <!-- Grille générée dynamiquement -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="catalog-grid">
+                    <!-- Cards will be injected here by JS -->
+                </div>
+                
+                <div class="mt-12 text-center text-gray-500 text-sm">
+                    * Voir conditions spécifiques de traversée et détails complets lors de la réservation avec nos conseillers. Caution remboursable applicable selon les lieux.
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PAGE 5: RÉSERVATION & CONTACT -->
+        <!-- ========================================== -->
+        <section id="page-reservation" class="page-view py-8 md:py-12 mb-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="bg-white rounded-3xl sm:rounded-[3rem] shadow-soft border border-gray-100 overflow-hidden flex flex-col lg:flex-row">
+                    
+                    <!-- Left: Contact Info -->
+                    <div class="lg:w-2/5 bg-dark p-8 sm:p-10 md:p-12 text-white relative overflow-hidden flex flex-col justify-between">
+                        <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-brand-500 rounded-full blur-[100px] opacity-30 pointer-events-none"></div>
+                        
+                        <div class="relative z-10">
+                            <h2 class="font-display text-3xl sm:text-4xl font-bold mb-4">Passez à<br><span class="text-brand-500">l'action.</span></h2>
+                            <p class="text-gray-400 mb-10 sm:mb-12 text-base sm:text-lg">Contactez-nous directement ou utilisez le formulaire pour une réservation rapide via WhatsApp.</p>
+                            
+                            <div class="space-y-6 sm:space-y-8">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-phone text-brand-500 text-lg sm:text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs sm:text-sm text-gray-400 mb-1">Appelez-nous</p>
+                                        <a href="tel:+2250777240278" class="block font-medium text-base sm:text-lg hover:text-brand-500 transition-colors">+225 07 77 24 02 78</a>
+                                        <a href="tel:+2250716174833" class="block font-medium text-base sm:text-lg hover:text-brand-500 transition-colors">+225 07 16 17 48 33</a>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-location-dot text-brand-500 text-lg sm:text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs sm:text-sm text-gray-400 mb-1">Localisation</p>
+                                        <p class="font-medium text-base sm:text-lg">Baie des Milliardaires<br>Abidjan, Côte d'Ivoire</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
+                                        <i class="fa-regular fa-clock text-brand-500 text-lg sm:text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs sm:text-sm text-gray-400 mb-1">Horaires</p>
+                                        <p class="font-medium text-base sm:text-lg">Assistance 24h/24, 7j/7</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MODIFICATIONS ICI : Liens Facebook & WhatsApp -->
+                        <div class="mt-10 sm:mt-12 flex gap-4 relative z-10">
+                            <a href="https://www.facebook.com/" target="_blank" class="w-10 h-10 sm:w-12 sm:h-12 border border-white/20 rounded-full flex items-center justify-center hover:bg-brand-500 hover:border-brand-500 transition-all">
+                                <i class="fa-brands fa-facebook-f text-sm sm:text-base"></i>
+                            </a>
+                            <a href="https://wa.me/2250777240278" target="_blank" class="w-10 h-10 sm:w-12 sm:h-12 border border-white/20 rounded-full flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] transition-all">
+                                <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: WhatsApp Form -->
+                    <div class="lg:w-3/5 p-6 sm:p-8 md:p-12 lg:p-16">
+                        <h3 class="font-display text-2xl sm:text-3xl font-bold text-dark mb-6 sm:mb-8">Formulaire de Réservation</h3>
+                        
+                        <form id="whatsappForm" onsubmit="sendToWhatsApp(event)" class="space-y-5 sm:space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Nom <span class="text-brand-500">*</span></label>
+                                    <input type="text" id="nom" required placeholder="Ex: DOSSO" class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Prénoms <span class="text-brand-500">*</span></label>
+                                    <input type="text" id="prenoms" required placeholder="Ex: Jean-Marc" class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Service désiré <span class="text-brand-500">*</span></label>
+                                    <div class="relative">
+                                        <select id="service" required class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base appearance-none bg-white cursor-pointer pr-10">
+                                            <option value="" disabled selected>Sélectionnez...</option>
+                                            <option value="Réservation de Villa / Appartement">Réservation Villa / Chambre</option>
+                                            <option value="Organisation d'Événement">Organisation d'Événement</option>
+                                            <option value="Pass Journée / Loisirs">Pass Journée / Loisirs</option>
+                                            <option value="Transport Privé (Bateau/Voiture)">Transport Privé (Bateau)</option>
+                                            <option value="Restauration / Table">Restauration / Table</option>
+                                            <option value="Autre demande">Autre demande</option>
+                                        </select>
+                                        <i class="fa-solid fa-chevron-down absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Date prévue <span class="text-brand-500">*</span></label>
+                                    <input type="date" id="date" required class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Complexe / Villa choisi(e) <span class="text-gray-400 font-normal">(Optionnel)</span></label>
+                                <input type="text" id="lieu" placeholder="Ex: BBR, Villa N'Fana..." class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base bg-gray-50 focus:bg-white transition-colors">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Détails <span class="text-gray-400 font-normal">(Optionnel)</span></label>
+                                <textarea id="message" rows="3" placeholder="Précisez vos besoins (nombre de personnes, logistique...)" class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#128C7E] hover:to-[#075E54] text-white font-bold text-base sm:text-lg py-4 sm:py-5 rounded-xl shadow-[0_15px_30px_-10px_rgba(37,211,102,0.4)] transform hover:-translate-y-1 transition-all flex justify-center items-center gap-2 sm:gap-3">
+                                <i class="fa-brands fa-whatsapp text-xl sm:text-2xl"></i> <span class="truncate">Envoyer ma demande via WhatsApp</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-6 sm:py-8 mt-auto z-10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <img src="https://i.postimg.cc/FFxPsXst/Whats-App-Image-2026-04-14-at-17-36-58.jpg" alt="Logo Baie des Milliardaires" class="w-8 h-8 rounded-lg object-cover shrink-0 shadow-sm">
+                <span class="font-display font-bold text-dark text-sm sm:text-base">BAIE DES MILLIARDAIRES</span>
+            </div>
+            <p class="text-gray-500 text-xs sm:text-sm text-center md:text-right">
+                &copy; 2026 Tous droits réservés. <br class="md:hidden">Fondé par Franck Sonaye.
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE BIENVENUE -->
+    <div id="welcome-modal" class="fixed inset-0 z-[110] hidden items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-500">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-dark/80 backdrop-blur-md" onclick="closeWelcomeModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl transform scale-95 transition-transform duration-500" id="welcome-modal-content">
+            <!-- Image Header -->
+            <div class="h-48 sm:h-56 relative">
+                <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80" alt="Image de bienvenue" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent flex items-end p-6">
+                    <h3 class="text-white font-display text-2xl sm:text-3xl font-bold">Bienvenue à la Baie</h3>
+                </div>
+                <!-- Close Button -->
+                <button onclick="closeWelcomeModal()" class="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-colors z-20">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <!-- Body -->
+            <div class="p-6 sm:p-8 text-center">
+                <div class="w-16 h-16 bg-brand-50 mx-auto rounded-2xl flex items-center justify-center mb-5 text-brand-500 shadow-soft">
+                    <i class="fa-solid fa-gem text-3xl"></i>
+                </div>
+                <p class="text-gray-600 text-base sm:text-lg mb-8 leading-relaxed">
+                    Découvrez l'élégance et le confort absolu de la <strong>Baie des Milliardaires</strong>. Laissez notre conciergerie de luxe organiser votre séjour ou événement sur-mesure.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button onclick="closeWelcomeModal(); navigate('catalogue');" class="bg-brand-500 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-brand-600 transition-all shadow-wahoo">
+                        Voir le Catalogue
+                    </button>
+                    <button onclick="closeWelcomeModal()" class="border border-gray-200 text-gray-700 px-6 py-3.5 rounded-xl font-semibold hover:bg-gray-50 transition-all">
+                        Explorer le site
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POUR AFFICHER LES DÉTAILS DU CATALOGUE -->
+    <div id="catalog-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-dark/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative bg-white rounded-3xl w-full max-w-5xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col transform transition-transform scale-95 opacity-0 duration-300" id="modal-content">
+            <!-- Close button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 bg-white/70 backdrop-blur-md rounded-full flex items-center justify-center text-dark hover:bg-brand-500 hover:text-white transition-colors z-20 shadow-sm">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- 3 Images Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2">
+                <div class="md:col-span-2 h-56 md:h-80 rounded-2xl overflow-hidden relative">
+                    <img id="modal-img-1" class="w-full h-full object-cover" src="" alt="Vue 1">
+                </div>
+                <div class="hidden md:flex flex-col gap-2 h-80">
+                    <div class="h-1/2 rounded-2xl overflow-hidden relative"><img id="modal-img-2" class="w-full h-full object-cover" src="" alt="Vue 2"></div>
+                    <div class="h-1/2 rounded-2xl overflow-hidden relative"><img id="modal-img-3" class="w-full h-full object-cover" src="" alt="Vue 3"></div>
+                </div>
+            </div>
+
+            <!-- Content Details -->
+            <div class="p-6 md:p-10 flex flex-col md:flex-row gap-8">
+               <div class="flex-grow">
+                  <span id="modal-badge" class="px-3 py-1 bg-brand-50 text-brand-600 rounded-full text-xs font-bold uppercase tracking-wider mb-3 inline-block"></span>
+                  <h2 id="modal-title" class="font-display text-3xl sm:text-4xl font-bold text-dark mb-2"></h2>
+                  <div class="text-gray-500 flex items-center gap-2 mb-6">
+                      <i class="fa-solid fa-location-dot text-brand-500"></i> <span id="modal-location" class="font-medium"></span>
+                  </div>
+
+                  <div id="modal-desc" class="prose max-w-none text-gray-600 space-y-4">
+                      <!-- Injection des détails ici -->
+                  </div>
+               </div>
+
+               <div class="md:w-1/3 shrink-0 flex flex-col gap-6">
+                   <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 text-center">
+                       <p class="text-sm text-gray-500 font-medium mb-1">Tarif indicatif</p>
+                       <div id="modal-price" class="text-2xl font-bold text-brand-500 mb-4"></div>
+                       <button id="modal-book-btn" class="w-full bg-dark text-white px-6 py-4 rounded-xl font-bold text-base hover:bg-brand-500 transition-colors shadow-wahoo flex justify-center items-center gap-2">
+                           Réserver via WhatsApp
+                       </button>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DATA ET LOGIQUE JAVASCRIPT -->
+    <script>
+        // === BASE DE DONNÉES COMPLÈTE DU CATALOGUE (Issue du PDF) ===
+        const catalogData = [
+            // COMPLEXES HÔTELIERS
+            {
+                id: 'mario', category: 'complexe', badge: 'Complexe Hôtelier', location: 'Lac Bakré',
+                title: 'Auberge Chez Mario', price: 'Dès 50.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1542314831-c6a4d14d837e?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590073844000-4b15dcb25281?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Auberge en bordure du Lac Bakré. Si tu as envie de calme, c'est l'endroit idéal.",
+                fullDesc: `
+                    <p>Si tu as envie de calme <strong>CHEZ MARIO EN BORDURE DU LAC BAKRÉ</strong>, c'est l'endroit idéal !</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Traversée Bateau (20 min) :</strong> 10.000Fr/pers (Gratuit 0-5 ans, 5000Fr 5-12 ans). Accès aux activités gratuites inclus.</li>
+                        <li><strong>Départ :</strong> Station Bietry Village.</li>
+                        <li><strong>Restauration :</strong> À l'assiette à partir de 20.000Fr pour 2 personnes.</li>
+                        <li><strong>Chambre d'hôtel :</strong> Prix unique 50.000Fr / 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'bbr', category: 'complexe', badge: 'Complexe Hôtelier', location: 'Baie',
+                title: 'Boulay Beach Resort (BBR)', price: 'Dès 25.000F / Jour',
+                images: [
+                    'https://images.unsplash.com/photo-1582610116397-edb318620f90?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Le plus haut standing sur la Baie. Immense piscine, restauration de qualité, et buffet le weekend.",
+                fullDesc: `
+                    <p>Le plus haut standing sur la Baie des milliardaires ! La plus grande piscine, un service restauration parfait et des activités exceptionnelles.</p>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Formules Pass Journée (Horaires bateau: 10h-16h)</h4>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Du Lundi au Vendredi (25.000Fr/pers) :</strong> Traversée A/R, Cocktail, Accès Piscine, Resto à la carte.</li>
+                        <li><strong>Spécial Samedi (50.000Fr/pers) :</strong> Traversée, Cocktail, Piscine, Buffet à volonté.</li>
+                        <li><strong>Spécial Dimanche (60.000Fr/pers) :</strong> Traversée, Cocktail, Piscine, Buffet (un peu plus garni) à volonté.</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Hébergement (Séjour 24h + Petit déjeuner + Traversée A/R)</h4>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Chambre Supérieure :</strong> 150.000Fr</li>
+                        <li><strong>Suite Jardin (Piscine privée) :</strong> 300.000Fr</li>
+                        <li><strong>Suite Lagune (Piscine privée) :</strong> 400.000Fr</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'ozatta', category: 'complexe', badge: 'Complexe Hôtelier', location: 'Baie',
+                title: 'Complexe Hôtelier Oz\'atta', price: 'Dès 45.000F / Chambre',
+                images: [
+                    'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Location complète d'espace pour événements (50-200 pers). Quad, balade à cheval, parc animalier.",
+                fullDesc: `
+                    <p>Idéal pour vos événements de groupe avec un grand espace disposant maintenant d'une piscine.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Location Espace (Team building, mariages, anniversaires...) :</strong> 400.000 Fcfa (capacité 50 à 200 pers).</li>
+                        <li><strong>Hébergement :</strong> 6 chambres à 45.000 Fcfa / chambre.</li>
+                        <li><strong>Transport Bateau :</strong> 15.000 Fcfa/pers A/R (Groupe >25 pers : 10.000 Fcfa). Possibilité d'accès depuis Yopougon.</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Activités</h4>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Payantes :</strong> Quad (20.000F/15min), Cheval (3000F/pers pour non-résidents, gratuit pour résidents).</li>
+                        <li><strong>Gratuites :</strong> Baby-foot, football, ping-pong, plage, volley, balançoire, parc animalier, randonnée, pêche.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'romano', category: 'complexe', badge: 'Complexe Hôtelier', location: 'Baie',
+                title: 'Chez Romano Lodge', price: 'Dès 50.000F / Nuit',
+                images: [
+                    'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Hôtel d'exception entre terre et mer. Restaurant gastronomique, jacuzzi dans chaque villa, parc paysager.",
+                fullDesc: `
+                    <p>Une parenthèse hors du temps. Un hôtel d'exception et un service haut de gamme dans l'un des plus beaux cadres du pays (Le Coin Chic).</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Chambres :</strong> 50.000F / 60.000F / 70.000F par Nuit.</li>
+                        <li><strong>Transport Bateau :</strong> 10.000F CFA / pers Aller-retour.</li>
+                        <li><strong>Restauration :</strong> Restaurant gastronomique à partir de 12.000F CFA à l'assiette.</li>
+                        <li><strong>Commodités :</strong> Jacuzzi DANS CHAQUE VILLA, Piscine extérieure, Parc paysager, Salle de conférence, WiFi.</li>
+                        <li><strong>Activités :</strong> Canoë kayak, pédalos, randonnée, baby foot, volley ball.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'valdez', category: 'complexe', badge: 'Complexe Hôtelier', location: 'Baie',
+                title: 'L\'Escale de la Baie Chez Valdez', price: 'Dès 30.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Complexe prisé et connu pour son fameux plat : La Pirogue de la Baie des Milliardaires.",
+                fullDesc: `
+                    <p>Complexe reconnu sur la Baie pour son fameux plat : <strong>LA PIROGUE DE LA BAIE DES MILLIARDAIRES</strong>.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Chambre d'hôtel :</strong> 30.000F ou 40.000F / Séjour 24H avec petit déjeuner.</li>
+                        <li><strong>Restauration :</strong> À l'assiette à partir de 20.000F pour 2 personnes.</li>
+                        <li><strong>Traversée (Bietry) :</strong> 10.000F / pers (Gratuit 0-5 ans, Moitié prix 5-12 ans). Accès aux activités inclus.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'sunday', category: 'complexe', badge: 'Complexe Hôtelier', location: 'Baie',
+                title: 'Hôtel Sunday', price: 'Dès 15.000F (Jour) / 30.000F (Nuit)',
+                images: [
+                    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Cadre paisible. Piscine, activités (canoë, volley, tir à l'arc). Formule journée ou Nuitée.",
+                fullDesc: `
+                    <p>Passez vos week-ends dans un cadre paisible et propre avec un personnel accueillant.</p>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Formule Pass Journée (15.000F / pers)</h4>
+                    <p class="text-sm text-gray-600 mb-2">Inclus : 1/2 poulet braisé + 2 garnitures + 1 boisson + eau + traversée pinasse A/R + activités gratuites.</p>
+                    
+                    <h4 class="font-bold text-lg mt-4 mb-2">Hébergement (24H de 12h à 12h)</h4>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Chambre Standard (30.000F) :</strong> Clim, Canal+, Piscine, Petit déj, activités.</li>
+                        <li><strong>Chambre Standard Plus (35.000F) :</strong> Même confort, plus d'espace.</li>
+                        <li><strong>Chambre Lagunaire (40.000F) :</strong> Eau chaude, vue lagunaire, pétanque, pêche.</li>
+                    </ul>
+                    <p class="text-sm text-gray-500 mt-4 italic">Départ Yopougon Azito (2500F A/R en pinasse) ou Bietry Village (10.000F A/R en bateau). Droit de bouchon : 1000F/boisson alcoolisée.</p>
+                `
+            },
+            {
+                id: 'rosabeach', category: 'complexe', badge: 'Complexe Hôtelier', location: 'Baie',
+                title: 'Rosa Beach Chez Rodrigue', price: 'Dès 50.000F / Nuit',
+                images: [
+                    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Départ Marina Bietry. Canoë, piscines, quad, jet ski, balades lagunaires. Chambres et résidence 3 pièces.",
+                fullDesc: `
+                    <p>Départ depuis la Marina Bietry Village. Complexe complet pour vos moments de divertissement intense.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Hébergement :</strong> Chambres de 50.000F à 120.000F/nuit (PDJ inclus). Résidence 3 pièces avec piscine privée : 250.000F/nuit.</li>
+                        <li><strong>Traversée :</strong> 10.000F/pers (>16ans). Enfants gratuits (0-9ans) ou 5000F (10-15ans).</li>
+                        <li><strong>Activités Gratuites :</strong> Canoë, piscine, volley, foot, pétanque, baby-foot, toboggan.</li>
+                        <li><strong>Activités Payantes :</strong> Quad (20.000F/30min), Pédalo (5000F/20min), Jet ski (15.000F/10min), Ballade lagunaire 8 pers (45.000F/30min), Ballade Lac Bakré (10.000F/5pers).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'coconut', category: 'complexe', badge: 'Complexe Hôtelier', location: 'Baie',
+                title: 'Coconut Grove Lodge', price: 'Dès 50.000F (Jour) / 110.000F (Nuit)',
+                images: [
+                    'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1613490900233-151c50e26173?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Lodge calme entouré de nature, parc animalier, menu gastronomique complet.",
+                fullDesc: `
+                    <p>Vous recherchez un lodge-restaurant calme, entouré de nature ? Coconut Grove est ce coin rare avec un parc animalier pour un retour à l'essentiel.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Pass Journée :</strong> 50.000F / adulte (Enfant >4ans : 30.000F).</li>
+                        <li><strong>Hébergement :</strong> Chambre séjour 110.000F. Chambre familiale luxe 150.000F.</li>
+                        <li><strong>Restauration :</strong> Déjeuner dès 30.000F. Dîner 15.000F à 25.000F. Gastronomie de haut vol (Carpaccio, Sole meunière, Médaillons de bœuf...).</li>
+                    </ul>
+                `
+            },
+
+            // VILLAS PRIVÉES
+            {
+                id: 'villastandard', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Villa Standard (2 Chambres)', price: '135.000F / Jour',
+                images: [
+                    'https://images.unsplash.com/photo-1613490900233-151c50e26173?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Villa avec baignoire, 1 cuisine, 1 salon, et une grande terrasse. Idéal pour petits groupes.",
+                fullDesc: `
+                    <p>Idéal pour se ressourcer en petit comité sur la Baie.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Composition :</strong> 2 chambres, 1 salon, 1 cuisine, 1 terrasse.</li>
+                        <li><strong>Équipements :</strong> Baignoire intégrée.</li>
+                        <li><strong>Tarif :</strong> 135.000F CFA / jour.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'nfana', category: 'villa-baie', badge: 'Villa Privée', location: 'Lac Bakré',
+                title: 'Villa N\'FANA', price: 'Dès 250.000F / Séjour',
+                images: [
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Somptueuse villa 5 pièces en bordure de lac. 4 chambres autonomes, piscine, jardin luxuriant.",
+                fullDesc: `
+                    <p>Somptueuse villa meublée de 5 pièces réunissant végétation luxuriante, cadre idyllique et reposant en bordure du lac Bakré.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Composition :</strong> 4 chambres autonomes, grand salon, cuisine équipée, jardin, piscine, WiFi, Canal+.</li>
+                        <li><strong>Activités :</strong> Accès auberge Chez Mario (Pédalo, Canoë, Tennis de table, Trampoline...).</li>
+                        <li><strong>Tarifs :</strong> 250.000F (Semaine) / 300.000F (Week-end). Négociable pour longs séjours.</li>
+                        <li><strong>Caution :</strong> 100.000F (Remboursable). Options cuisinier/ménage 24/24h disponibles.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'frahmaed', category: 'villa-baie', badge: 'Villa Privée', location: 'Lac Bakré',
+                title: 'Villa Frahmaed', price: '300.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Superbe villa 3 chambres bordure de lac Bakré. Immense jardin (200+ personnes) pour événements.",
+                fullDesc: `
+                    <p>Superbe villa avec 3 chambres (lits superposés), cuisine et douches en bordure du grand Lac Bakré.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Atout majeur :</strong> Un IMMENSE JARDIN pouvant accueillir plus de 200 personnes. Idéal pour vos événements, sorties d'entreprises ou réunions.</li>
+                        <li><strong>Tarif :</strong> 300.000F CFA / séjour 24h.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villabaie', category: 'villa-baie', badge: 'Villa Privée', location: 'Île Boulay',
+                title: 'Villa Baie (Île Boulay)', price: '500.000F / Nuitée',
+                images: [
+                    'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Superbe villa moderne bordure lagune. 4 ch, piscine, jardin plage, bateau inclus.",
+                fullDesc: `
+                    <p>Superbe villa moderne en bordure de lagune pour vos moments de détente absolus sur l'île Boulay.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Composition :</strong> 4 chambres indépendantes, grand séjour, vaste terrasse couverte, piscine, jardin plage.</li>
+                        <li><strong>Divertissements :</strong> Table de Ping Pong, pétanque, Baby Foot, Ludo, Monopoly, Scrabble.</li>
+                        <li><strong>Tarif :</strong> 500.000 FCFA / nuitée (<strong>Le Bateau de transport est INCLUS</strong> dans ce loyer).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'paradise', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Luxury House Paradise', price: '350.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1613553507747-5f8d62ad5904?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Superbe villa en pleine verdure à 50m du lac. 3 chambres salon, piscine privée, cuisine italienne.",
+                fullDesc: `
+                    <p>Nouveau produit ! Une superbe villa en pleine verdure située à seulement 50m de la bordure du lac.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Confort :</strong> Très bien meublée. 3 chambres, salon spacieux, magnifique piscine privée, cuisine moderne Italienne.</li>
+                        <li><strong>Événements :</strong> Disponible pour anniversaires et sorties entre amis.</li>
+                        <li><strong>Tarif :</strong> 350.000F / 24h.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'serenity', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Villa Sérénity', price: 'Dès 300.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Immense villa de 6 chambres, salons, piscine privée en bordure de lagune.",
+                fullDesc: `
+                    <p>Idéale pour les très grands groupes cherchant de l'intimité en bordure de lagune.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Composition :</strong> 6 Chambres, vastes salons, grande piscine privée, cuisine ultra-équipée.</li>
+                        <li><strong>Activités sur place :</strong> Volley-ball, football, Ludo, Awalé, Poker.</li>
+                        <li><strong>Tarifs :</strong> 300.000F en semaine / 500.000F en Week-end (Séjour 24H).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'djeke', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Villa Djeke Honoré', price: '150.000F à 350.000F',
+                images: [
+                    'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Grande villa modulable. Location possible pour 3 chambres ou 6 chambres (inclus PDJ).",
+                fullDesc: `
+                    <p>Superbe villa modulable selon la taille de votre groupe, avec piscine, cuisine, terrasse et grande table à manger.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Option 1 (Petit groupe) :</strong> Location de 3 chambres avec tout le confort pour 150.000F / Séjour 24H (Petit Déjeuner inclus).</li>
+                        <li><strong>Option 2 (Grand groupe) :</strong> Location des 6 chambres pour 350.000F / Séjour 24H (Petit Déjeuner inclus).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'keurboulay', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Villa Keur Boulay', price: 'Dès 250.000F / Jour',
+                images: [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1582610116397-edb318620f90?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "4 chambres autonomes, piscine avec jacuzzi, plage privée et Bateau privatif à disposition !",
+                fullDesc: `
+                    <p>Embarquez de l'ASNA (Treichville) à bord d'un bateau privatif de 10 places, à moins de 25 mn d'Abidjan.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>La Villa :</strong> 4 chambres autonomes, salon avec cuisine américaine, appatam, jardin et plage.</li>
+                        <li><strong>Piscine :</strong> Grande piscine avec Jacuzzi intégré.</li>
+                        <li><strong>Le Bateau :</strong> <strong>Bateau disponible pendant TOUT votre séjour</strong> pour vos balades (tarification spécifique pour le carburant de chaque sortie).</li>
+                        <li><strong>Tarifs :</strong> 250.000F/jour (Semaine) / 800.000F le week-end complet (Ven. soir à Dim. soir). Caution 30%.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'chalet', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Le Chalet de la Baie', price: 'Dès 150.000F / Jour',
+                images: [
+                    'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1542314831-c6a4d14d837e?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Villa modulable 1 à 2 chambres. Possibilité de chambre avec Jacuzzi pour journée.",
+                fullDesc: `
+                    <p>Un charmant chalet offrant des formules flexibles avec ou sans traversée.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Pass Journée (10h-17h) :</strong> Chambre dans le chalet avec Jacuzzi à 150.000F.</li>
+                        <li><strong>Semaine 24h :</strong> 200.000F / jour la location.</li>
+                        <li><strong>Week-end 24h (Avec bateau inclus) :</strong> Villa 1 chambre (300.000F pour 2 pers) / Villa 2 chambres (400.000F pour 4 pers). Rajout adulte 10.000F, enfant 5.000F.</li>
+                        <li><strong>Week-end complet (48h) :</strong> 600.000F du Vendredi au Dimanche.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'cabanon', category: 'villa-baie', badge: 'Villa Privée', location: 'Île Boulay',
+                title: 'Cabanon (Île Boulay)', price: 'Dès 150.000F',
+                images: [
+                    'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590073844000-4b15dcb25281?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Séjours au calme absolu en bordure de lagune. Idéal pour pêche et balades.",
+                fullDesc: `
+                    <p>Pour vos séjours au calme, ce Cabanon rustique et chic en bordure de lagune sur l'île Boulay est parfait.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Chambres :</strong> 2 chambres climatisées et 1 chambre ventilée.</li>
+                        <li><strong>Activités :</strong> Idéal pour profiter d'une balade lagunaire, découvrir les îles et villages environnants. Spécialité "Gone Fishing / Guide Service" (Pêche et traversée lagunaire).</li>
+                        <li><strong>Tarif :</strong> À partir de 150.000F CFA.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villa3lac', category: 'villa-baie', badge: 'Villa Privée', location: 'Lac Bakré',
+                title: 'Villa 3 Pièces (Lac)', price: '250.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Bordure du lac. 2 chambres, piscine privée, coffre fort. Canoë, pédalo inclus.",
+                fullDesc: `
+                    <p>Magnifique 3 pièces en bordure de lac pour une détente maximale.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Composition :</strong> 2 chambres, salon, cuisine équipée, baignoire, superbe piscine privée, coffre-fort.</li>
+                        <li><strong>Inclus :</strong> Activités gratuites comme le canoë, pédalo et jeux de société.</li>
+                        <li><strong>Tarif :</strong> 250.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villa4romano', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Villa 4 pièces (Romano Lodge)', price: '350.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "3 chambres salon, jacuzzi, terrasse. Accès à la piscine et aux activités du Lodge.",
+                fullDesc: `
+                    <p>L'indépendance d'une villa privée combinée aux services d'un Lodge de luxe.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Composition :</strong> 3 chambres, salon, jacuzzi privé, terrasse, table à manger.</li>
+                        <li><strong>Les plus :</strong> Vous pouvez ramener votre boisson. Accès à la piscine du Lodge, foot, volley, canoë, babyfoot. (Restauration sur la carte du menu Romano).</li>
+                        <li><strong>Tarif :</strong> 350.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villa5vue', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Villa 5 Chambres Belle Vue', price: '550.000F / Villa',
+                images: [
+                    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Superbe villa, 2 salles de bains, piscine, terrasse, ponton, bateau 10 pers.",
+                fullDesc: `
+                    <p>La grande classe pour les familles nombreuses ou groupes de direction avec bateau de transport inclus.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Commodités :</strong> 5 chambres, 2 salles de bains, 1 cuisine, 1 grande piscine, 1 belle terrasse, 1 ponton.</li>
+                        <li><strong>Bonus :</strong> Bateau pour 10 personnes Aller-Retour, balançoire, trampoline, jeux de société.</li>
+                        <li><strong>Tarifs :</strong> 550.000F pour la villa entière. (Possibilité de louer une chambre avec jacuzzi seul : 150.000F).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villa5romano', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Villa 5 pièces (Romano Lodge)', price: '400.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "4 chambres, salon, piscine privée, terrasse. Profitez de canoë, foot, volley.",
+                fullDesc: `
+                    <p>Une des plus grandes villas privées rattachées au complexe Romano Lodge.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Composition :</strong> 4 chambres, salon, piscine privée sur la terrasse avec table à manger.</li>
+                        <li><strong>Liberté :</strong> Ramenez vos boissons (repas via le menu du Lodge). Accès à toutes les activités du complexe.</li>
+                        <li><strong>Tarif :</strong> 400.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villa6lac', category: 'villa-baie', badge: 'Villa Privée', location: 'Lac Bakré',
+                title: 'Villa 6 Chambres (Lac)', price: '550.000F / Villa',
+                images: [
+                    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Tout confort en bordure du lac. 4 ch équipées, 2 ch avec jacuzzi, piscine vue lac.",
+                fullDesc: `
+                    <p>Immense résidence tout confort pour des séjours inoubliables en groupe face au lac.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Chambres :</strong> 4 chambres bien équipées + 2 chambres premium avec jacuzzi extérieur.</li>
+                        <li><strong>Espaces :</strong> 1 piscine avec vue magnifique sur le lac, 1 salon, 1 salle à manger.</li>
+                        <li><strong>Activités :</strong> Volley, foot gratuits. Moto quad payante (découverte environs).</li>
+                        <li><strong>Tarifs :</strong> Toute la villa 550.000F. Chambre avec jacuzzi seule : 150.000F.</li>
+                        <li><strong>Options :</strong> Transport bateau A/R 10.000F/pers. Forfait cuisinier 35.000F.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villaisland', category: 'villa-baie', badge: 'Villa Privée', location: 'Île Boulay',
+                title: 'Villa Island (Île Boulay)', price: '250.000F / Séjour',
+                images: [
+                    'https://images.unsplash.com/photo-1590073844000-4b15dcb25281?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "3 chambres, salon, piscine, jacuzzi. Idéal pour contempler le coucher du soleil.",
+                fullDesc: `
+                    <p>Ambiance cool et fun avec une exposition parfaite pour admirer le coucher du soleil.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Composition :</strong> 3 chambres, 1 salon, 1 cuisine, piscine, jacuzzi.</li>
+                        <li><strong>Activités :</strong> Trampoline, football, volleyball, babyfoot.</li>
+                        <li><strong>Tarifs :</strong> 250.000F la villa entière. Possibilité de louer une seule chambre : 60.000F.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villa2eau', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
+                title: 'Villa 2 Chambres (Vue Eau)', price: 'Dès 200.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Évasion & Luxe en bordure de l'eau. Cuisine moderne, superbe piscine privée.",
+                fullDesc: `
+                    <p>Un véritable havre de paix où confort, intimité et élégance se rencontrent. Parfait pour les week-ends en amoureux.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>La Villa :</strong> 2 belles chambres cosy climatisées, salon spacieux et lumineux, cuisine moderne, superbe piscine.</li>
+                        <li><strong>Cadre :</strong> Vue imprenable en bordure de l'eau, pour un coucher de soleil les pieds dans l'eau. Pédalo et jeux inclus.</li>
+                        <li><strong>Tarifs :</strong> 200.000F (Semaine) / 250.000F (Week-end).</li>
+                        <li><strong>Options :</strong> Bateau 10.000F/pers A/R. Cuisinier : 20.000F/jour.</li>
+                    </ul>
+                `
+            },
+
+            // ASSINIE / BASSAM / ABIDJAN
+            {
+                id: 'chaletlisbon', category: 'villa-autre', badge: 'Assinie', location: 'Assinie',
+                title: 'Luxury Chalet Lisbon', price: '450.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Belle villa 3 chambres à Assinie. Cuisine équipée, terrain de tennis, basket.",
+                fullDesc: `
+                    <p>L'excellence s'installe à Assinie avec ce somptueux Chalet de luxe pour vos séjours premiums.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Composition :</strong> Belle villa de 3 chambres, 1 salon avec cuisine entièrement équipée.</li>
+                        <li><strong>Loisirs sportifs :</strong> Terrain de tennis, Terrain de basket.</li>
+                        <li><strong>Commodités :</strong> Parking privé sécurisé.</li>
+                        <li><strong>Tarif :</strong> 450.000F / 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villaangre', category: 'villa-autre', badge: 'Abidjan', location: 'Angré 8ème Tranche',
+                title: 'Villa Les Arcades (Angré)', price: 'Sur Demande',
+                images: [
+                    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Splendide villa 5 pièces, Cité les Arcades. Jacuzzi, salle de réunion. (Pas d'événements).",
+                fullDesc: `
+                    <p>Pour vos séjours discrets et professionnels en plein cœur de la capitale (Abidjan).</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Localisation :</strong> Angré 8ème tranche (Cité les Arcades).</li>
+                        <li><strong>Commodités :</strong> Villa 5 pièces avec Jacuzzi, chauffe-eau, machine à laver, WiFi, Netflix, Canal+.</li>
+                        <li><strong>Business :</strong> Salle de réunion intégrée.</li>
+                        <li><strong>Restriction :</strong> Cette villa n'accepte PAS les événements festifs.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villabatel', category: 'villa-autre', badge: 'Assinie', location: 'Assinie Km 9.6',
+                title: 'Villa Batel (Assinie)', price: '500.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Très belle villa 5 pièces. Événements acceptés (prix forfaitaire pour événements).",
+                fullDesc: `
+                    <p>Une villa idéale pour conjuguer séjour et grands événements à Assinie.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Localisation :</strong> Assinie Km 9.6.</li>
+                        <li><strong>Description :</strong> Très belle villa de 5 pièces disponible pour séjours mémorables.</li>
+                        <li><strong>Événementiel :</strong> Possibilité d'organiser des événements (anniversaires, sorties). Notez qu'un prix forfaitaire spécial s'applique pour les événements.</li>
+                        <li><strong>Tarif séjour standard :</strong> 500.000F / 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'res2plateaux', category: 'villa-autre', badge: 'Abidjan', location: '2 Plateaux Vallon',
+                title: 'Résidence Meublée (Vallon)', price: '80.000F / Séjour',
+                images: [
+                    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Luxury Vallon. Sécurité 24h/24, fille de ménage, chambre indépendante tout confort.",
+                fullDesc: `
+                    <p>Un cadre agréable pour des séjours urbains inoubliables et sécurisés.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Localisation :</strong> 2 Plateaux Vallon, non loin de l'université FUPA.</li>
+                        <li><strong>Prestations :</strong> Chambre indépendante, WiFi, Chauffe-eau, WC visiteur, Bouquet Canal+.</li>
+                        <li><strong>Services Inclus :</strong> Fille de ménage, Sécurité garantie 24H/24.</li>
+                        <li><strong>Tarif :</strong> 80.000F / Séjour.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villadorena', category: 'villa-autre', badge: 'Bassam', location: 'Bassam (Modeste)',
+                title: 'Villa Dorena (Bassam)', price: '300.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1613553507747-5f8d62ad5904?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Villa 5 pièces. 4 grandes chambres, belle piscine, grand jardin, 2 filles de ménage.",
+                fullDesc: `
+                    <p>Magnifique villa dans une cité calme et sécurisée, à 10 minutes de l'aéroport.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>La Villa :</strong> 5 pièces, grand salon, 4 belles grandes chambres autonomes avec Canal+, belle cuisine équipée.</li>
+                        <li><strong>Extérieurs :</strong> Grande terrasse/dalle avec vue sur la piscine et le grand jardin.</li>
+                        <li><strong>Commodités :</strong> WiFi, Garage 3 voitures + extérieur, Agent de sécurité, 2 filles de ménage incluses.</li>
+                        <li><strong>Tarif :</strong> 300.000F / 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'cottageisland', category: 'villa-autre', badge: 'Assinie', location: 'Assinie Mafia',
+                title: 'Cottage Island (Assinie)', price: '400.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1613553507747-5f8d62ad5904?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590073844000-4b15dcb25281?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Superbe villa 3 chambres sur une île. Piscine privée, préau au bord de la lagune.",
+                fullDesc: `
+                    <p>Une évasion totale sur une île privée au cœur d'Assinie Mafia.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Description :</strong> Très belle villa de 3 chambres et salon située sur une île.</li>
+                        <li><strong>Aménagements :</strong> Belle piscine privée et un somptueux préau aménagé en bordure de lagune.</li>
+                        <li><strong>Capacité :</strong> 8 personnes au maximum.</li>
+                        <li><strong>Tarif :</strong> 400.000F / 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'villan2bassam', category: 'villa-autre', badge: 'Bassam', location: 'Bassam',
+                title: 'Villa N°2 (Bassam)', price: '350.000F / 24h',
+                images: [
+                    'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1582610116397-edb318620f90?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Très grande villa. Salon VIP écran géant, basket, piscine, jacuzzi, fontaine, mini zoo.",
+                fullDesc: `
+                    <p>L'extravagance et le divertissement concentrés dans une immense résidence non loin de la mer.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Intérieur :</strong> Très grande villa de 3 chambres, 1 grand salon classique + 1 Salon Privé VIP (capacité 15 pers) avec écran géant.</li>
+                        <li><strong>Équipements impressionnants :</strong> Piscine, Jacuzzi, Fontaine majestueuse, Grand jardin.</li>
+                        <li><strong>Loisirs & Nature :</strong> Mini terrain de basket, et même un Mini Zoo privatif !</li>
+                        <li><strong>Tarif :</strong> 350.000F / 24H.</li>
+                    </ul>
+                `
+            }
+        ];
+
+        // === LOGIQUE DE RENDU DU CATALOGUE ===
+        function renderCatalog(filter = 'all') {
+            const grid = document.getElementById('catalog-grid');
+            grid.innerHTML = '';
+
+            catalogData.forEach(item => {
+                if (filter === 'all' || item.category === filter) {
+                    const card = document.createElement('div');
+                    card.className = 'catalog-card bg-white rounded-3xl overflow-hidden border border-gray-100 flex flex-col h-full transform transition-all';
+                    card.innerHTML = `
+                        <div class="relative h-56">
+                            <img src="${item.images[0]}" alt="Image de ${item.title}" class="w-full h-full object-cover">
+                            <div class="absolute top-4 left-4 bg-dark/90 text-white backdrop-blur px-3 py-1 rounded-full text-xs font-bold shadow-sm">${item.badge}</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-display font-bold text-xl text-dark mb-2">${item.title}</h3>
+                            <p class="text-sm text-gray-500 mb-4 flex-grow">${item.shortDesc}</p>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="text-brand-500 font-bold">${item.price}</div>
+                                <div class="text-xs text-gray-400"><i class="fa-solid fa-location-dot"></i> ${item.location}</div>
+                            </div>
+                            <button onclick="openModal('${item.id}')" class="w-full py-3 bg-brand-50 text-brand-600 font-semibold rounded-xl hover:bg-brand-500 hover:text-white transition-colors border border-brand-100">
+                                Voir Détails & Réserver
+                            </button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+        }
+
+        // === GESTION DU MODAL ===
+        function openModal(id) {
+            const item = catalogData.find(c => c.id === id);
+            if (!item) return;
+
+            // Remplir les données
+            document.getElementById('modal-img-1').src = item.images[0];
+            document.getElementById('modal-img-2').src = item.images[1];
+            document.getElementById('modal-img-3').src = item.images[2];
+            
+            document.getElementById('modal-badge').innerText = item.badge;
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-location').innerText = item.location;
+            document.getElementById('modal-price').innerText = item.price;
+            document.getElementById('modal-desc').innerHTML = item.fullDesc;
+
+            // Paramétrer le bouton de réservation
+            const bookBtn = document.getElementById('modal-book-btn');
+            bookBtn.onclick = () => {
+                closeModal();
+                prefillReservation(item.title, (item.category === 'complexe') ? 'Pass Journée / Loisirs' : 'Réservation de Villa / Appartement');
+            };
+
+            // Afficher le modal avec animation
+            const modal = document.getElementById('catalog-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Timeout pour laisser le display block s'appliquer avant l'animation
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            
+            // Bloquer le scroll du body
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('catalog-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto'; // Rétablir le scroll
+            }, 300);
+        }
+
+        // === LOGIQUE DE NAVIGATION ET FILTRES ===
+        function filterCatalog(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-dark', 'text-white', 'border-dark');
+                btn.classList.add('bg-white', 'text-gray-700', 'border-gray-300');
+            });
+            
+            const activeBtn = document.getElementById('btn-filter-' + category);
+            activeBtn.classList.remove('bg-white', 'text-gray-700', 'border-gray-300');
+            activeBtn.classList.add('active'); 
+
+            renderCatalog(category);
+        }
+
+        function navigate(pageId, isMobile = false) {
+            document.querySelectorAll('.page-view').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const targetPage = document.getElementById('page-' + pageId);
+            if(targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if(link.getAttribute('data-target') === pageId) {
+                    link.classList.add('active', 'text-dark');
+                    link.classList.remove('text-gray-600');
+                } else {
+                    link.classList.remove('active', 'text-dark');
+                    link.classList.add('text-gray-600');
+                }
+            });
+
+            if (isMobile) {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // === INITIALISATION AU CHARGEMENT ===
+        window.onload = () => {
+            renderCatalog('all'); // Affiche tous les éléments du catalogue au démarrage
+            
+            // Logique du Pop-up de Bienvenue
+            if (!sessionStorage.getItem('welcomeShown')) {
+                setTimeout(() => {
+                    const welcomeModal = document.getElementById('welcome-modal');
+                    const welcomeContent = document.getElementById('welcome-modal-content');
+                    if(welcomeModal && welcomeContent) {
+                        welcomeModal.classList.remove('hidden');
+                        welcomeModal.classList.add('flex');
+                        
+                        // Force reflow pour lancer l'animation
+                        void welcomeModal.offsetWidth;
+                        
+                        welcomeModal.classList.remove('opacity-0');
+                        welcomeContent.classList.remove('scale-95');
+                        welcomeContent.classList.add('scale-100');
+                        
+                        sessionStorage.setItem('welcomeShown', 'true');
+                    }
+                }, 1500); // Le pop-up apparaît doucement après 1.5s
+            }
+        };
+
+        function closeWelcomeModal() {
+            const welcomeModal = document.getElementById('welcome-modal');
+            const welcomeContent = document.getElementById('welcome-modal-content');
+            
+            if(welcomeModal && welcomeContent) {
+                welcomeModal.classList.add('opacity-0');
+                welcomeContent.classList.remove('scale-100');
+                welcomeContent.classList.add('scale-95');
+                
+                setTimeout(() => {
+                    welcomeModal.classList.add('hidden');
+                    welcomeModal.classList.remove('flex');
+                }, 500); // Correspond à duration-500
+            }
+        }
+
+        // Menu Mobile Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // === FORMULAIRE ET WHATSAPP ===
+        function prefillReservation(nomLieu, typeService) {
+            document.getElementById('lieu').value = nomLieu;
+            
+            const serviceSelect = document.getElementById('service');
+            for (let i = 0; i < serviceSelect.options.length; i++) {
+                if (serviceSelect.options[i].value === typeService) {
+                    serviceSelect.selectedIndex = i;
+                    break;
+                }
+            }
+            
+            navigate('reservation');
+            setTimeout(() => {
+                document.getElementById('whatsappForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+
+            const nom = document.getElementById('nom').value.trim();
+            const prenoms = document.getElementById('prenoms').value.trim();
+            const service = document.getElementById('service').value;
+            const lieu = document.getElementById('lieu').value.trim();
+            const date = document.getElementById('date').value;
+            const message = document.getElementById('message').value.trim();
+
+            const dateObj = new Date(date);
+            const formattedDate = dateObj.toLocaleDateString('fr-FR', {
+                day: '2-digit', month: '2-digit', year: 'numeric'
+            });
+
+            let whatsappText = `*🎫 NOUVELLE RÉSERVATION* \n\n`;
+            whatsappText += `👤 *Client :* ${nom.toUpperCase()} ${prenoms}\n`;
+            whatsappText += `✨ *Service demandé :* ${service}\n`;
+            if (lieu) {
+                whatsappText += `🏨 *Établissement/Villa :* ${lieu}\n`;
+            }
+            whatsappText += `📅 *Date prévue :* ${formattedDate}\n`;
+            
+            if (message) {
+                whatsappText += `\n📝 *Détails supplémentaires :*\n${message}\n`;
+            }
+
+            whatsappText += `\n_Demande envoyée depuis le site officiel._`;
+
+            const encodedText = encodeURIComponent(whatsappText);
+            const waNumber = "2250777240278";
+            
+            window.open(`https://wa.me/${waNumber}?text=${encodedText}`, '_blank');
+            
+            document.getElementById('whatsappForm').reset();
+            document.getElementById('lieu').value = ''; 
+        }
+    </script>
+</body>
+</html>
