@@ -127,11 +127,12 @@
                 </a>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden lg:flex items-center space-x-8">
+                <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
                     <button onclick="navigate('accueil')" class="nav-link active font-medium text-gray-600 hover:text-dark transition-colors" data-target="accueil">Accueil</button>
-                    <button onclick="navigate('apropos')" class="nav-link font-medium text-gray-600 hover:text-dark transition-colors" data-target="apropos">Notre Histoire</button>
+                    <button onclick="navigate('apropos')" class="nav-link font-medium text-gray-600 hover:text-dark transition-colors" data-target="apropos">Histoire</button>
                     <button onclick="navigate('services')" class="nav-link font-medium text-gray-600 hover:text-dark transition-colors" data-target="services">Services</button>
-                    <button onclick="navigate('catalogue')" class="nav-link font-medium text-gray-600 hover:text-dark transition-colors" data-target="catalogue">Catalogue Hébergements</button>
+                    <button onclick="navigate('loisirs')" class="nav-link font-medium text-brand-600 hover:text-brand-500 transition-colors" data-target="loisirs">Loisirs & Formules</button>
+                    <button onclick="navigate('catalogue')" class="nav-link font-medium text-gray-600 hover:text-dark transition-colors" data-target="catalogue">Hébergements</button>
                     <button onclick="navigate('reservation')" class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-2xl font-semibold transition-all shadow-wahoo transform hover:-translate-y-1 flex items-center gap-2">
                         <i class="fa-solid fa-calendar-plus"></i> Réserver
                     </button>
@@ -152,6 +153,7 @@
                 <button onclick="navigate('accueil', true)" class="w-full text-left px-6 py-4 rounded-xl text-lg font-medium text-gray-800 hover:bg-brand-50 hover:text-brand-500 transition-colors">Accueil</button>
                 <button onclick="navigate('apropos', true)" class="w-full text-left px-6 py-4 rounded-xl text-lg font-medium text-gray-800 hover:bg-brand-50 hover:text-brand-500 transition-colors">Notre Histoire</button>
                 <button onclick="navigate('services', true)" class="w-full text-left px-6 py-4 rounded-xl text-lg font-medium text-gray-800 hover:bg-brand-50 hover:text-brand-500 transition-colors">Services</button>
+                <button onclick="navigate('loisirs', true)" class="w-full text-left px-6 py-4 rounded-xl text-lg font-bold text-brand-600 hover:bg-brand-50 hover:text-brand-500 transition-colors">Loisirs, Motos & Formules</button>
                 <button onclick="navigate('catalogue', true)" class="w-full text-left px-6 py-4 rounded-xl text-lg font-medium text-gray-800 hover:bg-brand-50 hover:text-brand-500 transition-colors">Catalogue Hébergements</button>
                 <button onclick="navigate('reservation', true)" class="w-full text-center mt-4 bg-brand-500 text-white px-6 py-4 rounded-xl font-bold shadow-wahoo text-lg flex items-center justify-center gap-2">
                     <i class="fa-solid fa-calendar-plus"></i> Faire une Réservation
@@ -170,7 +172,7 @@
             <div class="relative w-full px-4 sm:px-6 lg:px-8 mt-2 md:mt-6">
                 <div class="max-w-7xl mx-auto bg-dark rounded-3xl sm:rounded-[3rem] overflow-hidden relative min-h-[70vh] md:min-h-[80vh] flex items-center">
                     <div class="absolute inset-0">
-                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover opacity-40" alt="Vue d'une villa">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover opacity-40" alt="Vue d'une villa de luxe">
                         <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/90 sm:via-dark/80 to-transparent"></div>
                     </div>
                     
@@ -183,14 +185,14 @@
                             L'Évasion Parfaite à la <br class="hidden sm:block"><span class="text-gradient">Baie des Milliardaires</span>
                         </h1>
                         <p class="text-base sm:text-lg md:text-xl text-gray-300 mb-8 md:mb-10 max-w-2xl font-light">
-                            Réservation de villas haut standing, organisation d'événements sur mesure et expériences exclusives au cœur du plus beau site touristique de Côte d'Ivoire.
+                            Réservation de villas haut standing, organisation d'événements sur mesure, bateaux, motos et expériences exclusives au cœur du plus beau site touristique de Côte d'Ivoire.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
                             <button onclick="navigate('catalogue')" class="w-full sm:w-auto bg-brand-500 hover:bg-white hover:text-brand-500 text-white px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 flex justify-center items-center gap-3">
                                 Voir le catalogue <i class="fa-solid fa-arrow-right"></i>
                             </button>
-                            <button onclick="navigate('services')" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-6 md:px-8 py-4 rounded-2xl font-semibold text-base md:text-lg transition-all duration-300 flex justify-center items-center">
-                                Explorer nos services
+                            <button onclick="navigate('loisirs')" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-6 md:px-8 py-4 rounded-2xl font-semibold text-base md:text-lg transition-all duration-300 flex justify-center items-center">
+                                Loisirs & Formules
                             </button>
                         </div>
                     </div>
@@ -209,8 +211,8 @@
                         <div class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-widest">Clients Actifs</div>
                     </div>
                     <div class="text-center p-2">
-                        <div class="text-3xl sm:text-4xl font-display font-bold text-brand-500 mb-1 sm:mb-2">30+</div>
-                        <div class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-widest">Complexes & Villas</div>
+                        <div class="text-3xl sm:text-4xl font-display font-bold text-brand-500 mb-1 sm:mb-2">45+</div>
+                        <div class="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-widest">Complexes & Suites</div>
                     </div>
                     <div class="text-center p-2">
                         <div class="text-3xl sm:text-4xl font-display font-bold text-brand-500 mb-1 sm:mb-2">28k</div>
@@ -286,7 +288,7 @@
                     <!-- Hébergement -->
                     <div class="bento-card md:col-span-2 md:row-span-2 bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 flex flex-col justify-between relative overflow-hidden group min-h-[300px] md:min-h-0">
                         <div class="absolute inset-0 bg-brand-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" class="absolute right-0 bottom-0 w-2/3 md:w-1/2 h-[120%] object-cover rounded-tl-[4rem] opacity-10 md:opacity-20 group-hover:opacity-40 transition-opacity" alt="Villa premium">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" class="absolute right-0 bottom-0 w-2/3 md:w-1/2 h-[120%] object-cover rounded-tl-[4rem] opacity-10 md:opacity-20 group-hover:opacity-40 transition-opacity" alt="Villa premium avec piscine">
                         <div>
                             <div class="w-14 h-14 sm:w-16 sm:h-16 bg-brand-500 rounded-xl sm:rounded-2xl flex items-center justify-center mb-6 shadow-wahoo">
                                 <i class="fa-solid fa-house-chimney text-white text-xl sm:text-2xl"></i>
@@ -294,7 +296,7 @@
                             <h3 class="font-display text-2xl sm:text-3xl font-bold text-dark mb-4">Réservation de Villas<br>& Chambres d'Hôtel</h3>
                         </div>
                         <p class="text-gray-600 text-base sm:text-lg max-w-md relative z-10">
-                            Accès exclusif à plus de 30 villas privées, cabanons et complexes hôteliers (BBR, Romano, Sunday...). Sur la Baie, à Assinie ou Bassam.
+                            Accès exclusif à plus de 45 villas privées, cabanons et complexes hôteliers (BBR, Romano, Sunday...). Sur la Baie, à Assinie ou Bassam.
                         </p>
                     </div>
 
@@ -310,25 +312,25 @@
                         </p>
                     </div>
 
-                    <!-- Pass Journée -->
+                    <!-- Loisirs -->
                     <div class="bento-card bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 flex flex-col justify-between min-h-[200px] md:min-h-0">
                         <div>
-                            <i class="fa-solid fa-sun text-brand-500 text-3xl mb-4"></i>
-                            <h3 class="font-display text-xl font-bold text-dark mb-2">Pass Journée & Loisirs</h3>
+                            <i class="fa-solid fa-motorcycle text-brand-500 text-3xl mb-4"></i>
+                            <h3 class="font-display text-xl font-bold text-dark mb-2">Location de Motos & Jetski</h3>
                         </div>
                         <p class="text-gray-600 text-sm mt-4 md:mt-0">
-                            Profitez des buffets (BBR), balades en quad, cheval, jet ski, et activités lagunaires sans passer la nuit.
+                            Moto Quad à 20.000F, Jet Ski à 15.000F et autres activités nautiques et terrestres pour sublimer votre séjour.
                         </p>
                     </div>
 
-                    <!-- Transport -->
+                    <!-- Transport Bateau -->
                     <div class="bento-card bg-brand-500 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-white shadow-wahoo min-h-[200px] md:min-h-0">
                         <div>
                             <i class="fa-solid fa-ship text-white text-3xl mb-4"></i>
-                            <h3 class="font-display text-xl font-bold text-white mb-2">Traversée & Transport</h3>
+                            <h3 class="font-display text-xl font-bold text-white mb-2">Location de Bateau Privé</h3>
                         </div>
                         <p class="text-white/90 text-sm mt-4 md:mt-0">
-                            Organisation de vos traversées en bateau depuis Bietry, Yopougon Azito, ou navettes privées.
+                            Bateaux 6 places (Skipper inclus) pour admirer le coucher du soleil à Abidjan, Baie ou Assinie.
                         </p>
                     </div>
 
@@ -353,22 +355,160 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- PAGE 4: CATALOGUE DYNAMIQUE -->
+        <!-- PAGE 4: NOUVELLE PAGE - LOISIRS, BATEAUX & FORMULES -->
+        <!-- ========================================== -->
+        <section id="page-loisirs" class="page-view py-8 md:py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 md:mb-16">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mb-4">Loisirs, Transports & <span class="text-gradient">Formules</span></h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">Des expériences sur-mesure pour sublimer votre séjour à la Baie des Milliardaires.</p>
+                </div>
+
+                <!-- SECTION BATEAU & MOTO -->
+                <h3 class="font-display text-2xl font-bold text-dark mb-6 border-b border-gray-200 pb-2">Transports Privés & Loisirs</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    <!-- Bateau -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-soft border border-gray-100 flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" class="h-64 w-full object-cover" alt="Location de Bateau">
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h4 class="font-display text-2xl font-bold text-brand-500 mb-3">Location de Bateau & Balades</h4>
+                            <p class="text-gray-600 mb-4">Disposez d'un bateau de 6 places pour des balades inoubliables en vue de voir le coucher du soleil ☀️. (Abidjan - Baie des Milliardaires - Assinie)</p>
+                            <div class="bg-gray-50 p-4 rounded-xl mb-6">
+                                <h5 class="font-bold text-dark mb-2">Tarifs (Skipper inclus, hors carburant) :</h5>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>• 1H : 30.000 FCFA / 50€</li>
+                                    <li>• 3H : 50.000 FCFA / 80€</li>
+                                    <li>• 6H : 60.000 FCFA / 100€</li>
+                                    <li>• 8H : 80.000 FCFA / 125€</li>
+                                    <li>• 24H : 200.000 FCFA / 300€</li>
+                                </ul>
+                            </div>
+                            <p class="text-sm font-medium text-gray-500 mb-6 flex-grow"><i class="fa-solid fa-location-dot text-brand-500"></i> Départ : Zone 3, Abidjan.</p>
+                            <button onclick="prefillReservation('Location Bateau de 6 Places', 'Transport Privé (Bateau)')" class="bg-brand-500 text-white font-bold w-full py-4 rounded-xl hover:bg-brand-600 transition-colors shadow-wahoo">Réserver ce Bateau</button>
+                        </div>
+                    </div>
+
+                    <!-- Moto Quad / Jet Ski -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-soft border border-gray-100 flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1596324121712-5bbc14482174?auto=format&fit=crop&w=800&q=80" class="h-64 w-full object-cover" alt="Location de Moto Quad">
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h4 class="font-display text-2xl font-bold text-brand-500 mb-3">Location de Motos, Quad & Jet Ski</h4>
+                            <p class="text-gray-600 mb-4">Adrénaline, découverte et fun sur les pistes et les eaux de la Baie des Milliardaires.</p>
+                            <div class="bg-gray-50 p-4 rounded-xl mb-6">
+                                <h5 class="font-bold text-dark mb-2">Activités & Tarifs :</h5>
+                                <ul class="text-sm text-gray-700 space-y-2 mt-3">
+                                    <li class="flex justify-between items-center border-b border-gray-200 pb-2"><strong>Faire de la Moto Quad</strong> <span class="text-brand-500 font-bold">20.000 F CFA</span></li>
+                                    <li class="flex justify-between items-center border-b border-gray-200 pb-2"><strong>Faire du Jet Ski</strong> <span class="text-brand-500 font-bold">15.000 F CFA</span></li>
+                                    <li class="flex justify-between items-center"><strong>Faire du Vélo</strong> <span class="text-brand-500 font-bold">5.000 F CFA</span></li>
+                                </ul>
+                            </div>
+                            <p class="text-sm font-medium text-gray-500 mb-6 flex-grow"><i class="fa-solid fa-circle-info text-brand-500"></i> Matériel et consignes de sécurité inclus.</p>
+                            <button onclick="prefillReservation('Location Moto Quad / Jet Ski / Vélo', 'Loisirs (Moto/Bateau)')" class="bg-brand-500 text-white font-bold w-full py-4 rounded-xl hover:bg-brand-600 transition-colors shadow-wahoo">Réserver une Activité</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION FORMULES -->
+                <h3 class="font-display text-2xl font-bold text-dark mb-6 border-b border-gray-200 pb-2">Nos Formules "Clé en Main"</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <!-- Formule Séjour (135k) -->
+                    <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 flex flex-col">
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h4 class="font-display text-xl font-bold text-dark mb-2">Formule Séjour (2 pers)</h4>
+                            <div class="text-3xl font-bold text-brand-500 mb-4">135.000 F CFA</div>
+                            <ul class="text-sm text-gray-600 space-y-2 mb-6 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> 2 traversées bateau aller-retour</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Chambre incluse</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Petit déjeuner complet</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Dîner au clair de lune (Entrée, plat de résistance, soda/vin à table, dessert)</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Activités : Canoë, piscine, jeux de société</li>
+                            </ul>
+                            <button onclick="prefillReservation('Formule Séjour 2 pers (135.000F)', 'Formule Complète')" class="border-2 border-dark font-bold text-dark w-full py-3 rounded-xl hover:bg-dark hover:text-white transition-colors">Choisir cette formule</button>
+                        </div>
+                    </div>
+
+                    <!-- Formule 5 Pers (135k) -->
+                    <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 flex flex-col">
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h4 class="font-display text-xl font-bold text-dark mb-2">"Sous les Tropiques" (5 pers)</h4>
+                            <div class="text-3xl font-bold text-brand-500 mb-4">135.000 F CFA</div>
+                            <ul class="text-sm text-gray-600 space-y-2 mb-6 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> 5 traversées bateau aller-retour</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Welcome Coconut</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Repas : Poisson braisé, Gambas pané, Langouste, 6 accompagnements</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Eau à table + Menu boissons à la carte</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Activités : Canoë, piscine, foot, volley, billard</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Découverte du lac Bakré en camionnette</li>
+                            </ul>
+                            <button onclick="prefillReservation('Formule Sous les Tropiques 5 pers (135.000F)', 'Formule Complète')" class="border-2 border-dark font-bold text-dark w-full py-3 rounded-xl hover:bg-dark hover:text-white transition-colors">Choisir cette formule</button>
+                        </div>
+                    </div>
+
+                    <!-- Pass Journée 2 pers (50k) -->
+                    <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 flex flex-col">
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h4 class="font-display text-xl font-bold text-dark mb-2">Pass Journée (2 pers)</h4>
+                            <div class="text-3xl font-bold text-brand-500 mb-4">50.000 F CFA</div>
+                            <ul class="text-sm text-gray-600 space-y-2 mb-6 flex-grow">
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> 2 traversées bateau aller-retour</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> 1 Poulet braisé ou Poisson braisé</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> 3 accompagnements</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Eau à table + 2 sodas / 2 bières locales</li>
+                                <li><i class="fa-solid fa-check text-brand-500 mr-2"></i> Activités : Canoë, piscine, foot, volley, babyfoot</li>
+                            </ul>
+                            <button onclick="prefillReservation('Pass Journée 2 pers (50.000F)', 'Formule Complète')" class="border-2 border-dark font-bold text-dark w-full py-3 rounded-xl hover:bg-dark hover:text-white transition-colors">Choisir cette formule</button>
+                        </div>
+                    </div>
+
+                    <!-- Bon Plan -->
+                    <div class="bg-brand-50 rounded-3xl overflow-hidden border border-brand-100 flex flex-col md:col-span-2 lg:col-span-3 shadow-sm">
+                        <div class="p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div class="flex-grow">
+                                <span class="inline-block bg-brand-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full mb-3">Recommandé</span>
+                                <h4 class="font-display text-2xl font-bold text-dark mb-3">Pass Séjour "Bon Plan" pour 2</h4>
+                                <p class="text-gray-600 mb-4 text-lg">Un séjour magique incluant : Traversée bateau, Chambre simple, Petit déjeuner, Dîner, Accès à la piscine, Canoë, Jeux de société, et une <strong>Activité surprise (balade à vélo)</strong> !</p>
+                                <p class="italic font-medium text-brand-600 text-lg"><i class="fa-solid fa-heart mr-2"></i> La Gaîté d'un goût simple et agréable.</p>
+                            </div>
+                            <button onclick="prefillReservation('Pass Séjour Bon Plan pour 2', 'Formule Complète')" class="shrink-0 bg-dark text-white font-bold w-full md:w-auto px-10 py-5 rounded-xl hover:bg-brand-500 transition-colors shadow-wahoo text-lg">Réserver ce Pass</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VILLA PROMO BOX -->
+                <div class="bg-dark rounded-3xl overflow-hidden p-8 text-white flex flex-col md:flex-row items-center justify-between gap-8 mb-10 relative">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-500 blur-3xl opacity-30"></div>
+                    <div class="relative z-10">
+                        <h4 class="font-display text-3xl font-bold mb-3">Villas Privées à la Baie</h4>
+                        <p class="text-gray-300 text-lg mb-4">Idéal pour les groupes d'amis et les familles. Profitez d'un séjour unique dans un cadre naturel et calme avec piscine, canoë et jeux de société.</p>
+                        <ul class="text-sm text-gray-400 space-y-2 mb-4">
+                            <li><i class="fa-solid fa-circle-check text-brand-500 mr-2"></i> Location de grande villa privée à partir de <strong class="text-white">300.000 F CFA</strong>.</li>
+                            <li><i class="fa-solid fa-circle-check text-brand-500 mr-2"></i> Frais suppl. : Transport bateau (10.000 F CFA/pers), Cuisinier (40.000 F CFA / 24H).</li>
+                        </ul>
+                    </div>
+                    <button onclick="navigate('catalogue')" class="shrink-0 bg-white text-dark font-bold px-10 py-4 rounded-xl hover:bg-brand-500 hover:text-white transition-colors relative z-10">Découvrir les Villas</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- PAGE 5: CATALOGUE DYNAMIQUE -->
         <!-- ========================================== -->
         <section id="page-catalogue" class="page-view py-8 md:py-12 bg-gray-50 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="text-center mb-10 md:mb-12">
                     <h2 class="font-display text-4xl md:text-5xl font-bold text-dark mb-4">Catalogue <span class="text-gradient">Complet</span></h2>
-                    <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">Découvrez l'intégralité de nos complexes, villas sur la baie et résidences exclusives (Plus de 30 offres).</p>
+                    <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">Découvrez l'intégralité de nos complexes, villas sur la baie, résidences exclusives et chambres d'hôtel (Plus de 45 offres).</p>
                 </div>
 
                 <!-- Filtres -->
                 <div class="flex flex-wrap justify-center gap-3 mb-12">
                     <button onclick="filterCatalog('all')" id="btn-filter-all" class="filter-btn active px-5 py-2.5 rounded-full border border-gray-300 font-medium text-sm transition-all hover:border-dark">Tous</button>
-                    <button onclick="filterCatalog('complexe')" id="btn-filter-complexe" class="filter-btn px-5 py-2.5 bg-white rounded-full border border-gray-300 text-gray-700 font-medium text-sm transition-all hover:border-dark">Complexes Hôteliers (Baie)</button>
+                    <button onclick="filterCatalog('complexe')" id="btn-filter-complexe" class="filter-btn px-5 py-2.5 bg-white rounded-full border border-gray-300 text-gray-700 font-medium text-sm transition-all hover:border-dark">Complexes Hôteliers</button>
+                    <button onclick="filterCatalog('chambre')" id="btn-filter-chambre" class="filter-btn px-5 py-2.5 bg-white rounded-full border border-gray-300 text-gray-700 font-medium text-sm transition-all hover:border-dark">Chambres & Suites</button>
                     <button onclick="filterCatalog('villa-baie')" id="btn-filter-villa-baie" class="filter-btn px-5 py-2.5 bg-white rounded-full border border-gray-300 text-gray-700 font-medium text-sm transition-all hover:border-dark">Villas Privées (Baie)</button>
-                    <button onclick="filterCatalog('villa-autre')" id="btn-filter-villa-autre" class="filter-btn px-5 py-2.5 bg-white rounded-full border border-gray-300 text-gray-700 font-medium text-sm transition-all hover:border-dark">Villas (Assinie/Bassam/Abidjan)</button>
+                    <button onclick="filterCatalog('villa-autre')" id="btn-filter-villa-autre" class="filter-btn px-5 py-2.5 bg-white rounded-full border border-gray-300 text-gray-700 font-medium text-sm transition-all hover:border-dark">Villas (Assinie/Bassam...)</button>
                 </div>
 
                 <!-- Grille générée dynamiquement -->
@@ -383,7 +523,7 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- PAGE 5: RÉSERVATION & CONTACT -->
+        <!-- PAGE 6: RÉSERVATION & CONTACT -->
         <!-- ========================================== -->
         <section id="page-reservation" class="page-view py-8 md:py-12 mb-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -467,8 +607,10 @@
                                             <option value="" disabled selected>Sélectionnez...</option>
                                             <option value="Réservation de Villa / Appartement">Réservation Villa / Chambre</option>
                                             <option value="Organisation d'Événement">Organisation d'Événement</option>
-                                            <option value="Pass Journée / Loisirs">Pass Journée / Loisirs</option>
-                                            <option value="Transport Privé (Bateau/Voiture)">Transport Privé (Bateau)</option>
+                                            <option value="Loisirs (Moto/Bateau)">Loisirs (Moto/Bateau)</option>
+                                            <option value="Formule Complète">Formule Complète</option>
+                                            <option value="Pass Journée / Loisirs">Pass Journée Classique</option>
+                                            <option value="Transport Privé (Bateau/Voiture)">Transport Privé Seulement</option>
                                             <option value="Restauration / Table">Restauration / Table</option>
                                             <option value="Autre demande">Autre demande</option>
                                         </select>
@@ -482,13 +624,13 @@
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Complexe / Villa choisi(e) <span class="text-gray-400 font-normal">(Optionnel)</span></label>
-                                <input type="text" id="lieu" placeholder="Ex: BBR, Villa N'Fana..." class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base bg-gray-50 focus:bg-white transition-colors">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Complexe / Villa / Loisir / Formule <span class="text-gray-400 font-normal">(Optionnel)</span></label>
+                                <input type="text" id="lieu" placeholder="Ex: BBR, Location Bateau, Formule..." class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base bg-gray-50 focus:bg-white transition-colors">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Détails <span class="text-gray-400 font-normal">(Optionnel)</span></label>
-                                <textarea id="message" rows="3" placeholder="Précisez vos besoins (nombre de personnes, logistique...)" class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base resize-none"></textarea>
+                                <textarea id="message" rows="3" placeholder="Précisez vos besoins (nombre de personnes, heures de location...)" class="input-modern w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl text-dark text-base resize-none"></textarea>
                             </div>
 
                             <button type="submit" class="w-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#128C7E] hover:to-[#075E54] text-white font-bold text-base sm:text-lg py-4 sm:py-5 rounded-xl shadow-[0_15px_30px_-10px_rgba(37,211,102,0.4)] transform hover:-translate-y-1 transition-all flex justify-center items-center gap-2 sm:gap-3">
@@ -524,7 +666,7 @@
         <div class="relative bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl transform scale-95 transition-transform duration-500" id="welcome-modal-content">
             <!-- Image Header -->
             <div class="h-48 sm:h-56 relative">
-                <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80" alt="Image de bienvenue" class="w-full h-full object-cover">
+                <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=800&q=80" alt="Vue aérienne de la Baie" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent flex items-end p-6">
                     <h3 class="text-white font-display text-2xl sm:text-3xl font-bold">Bienvenue à la Baie</h3>
                 </div>
@@ -569,11 +711,11 @@
             <!-- 3 Images Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 p-2">
                 <div class="md:col-span-2 h-56 md:h-80 rounded-2xl overflow-hidden relative">
-                    <img id="modal-img-1" class="w-full h-full object-cover" src="" alt="Vue 1">
+                    <img id="modal-img-1" class="w-full h-full object-cover" src="" alt="Vue principale de l'établissement">
                 </div>
                 <div class="hidden md:flex flex-col gap-2 h-80">
-                    <div class="h-1/2 rounded-2xl overflow-hidden relative"><img id="modal-img-2" class="w-full h-full object-cover" src="" alt="Vue 2"></div>
-                    <div class="h-1/2 rounded-2xl overflow-hidden relative"><img id="modal-img-3" class="w-full h-full object-cover" src="" alt="Vue 3"></div>
+                    <div class="h-1/2 rounded-2xl overflow-hidden relative"><img id="modal-img-2" class="w-full h-full object-cover" src="" alt="Vue 2 de l'établissement"></div>
+                    <div class="h-1/2 rounded-2xl overflow-hidden relative"><img id="modal-img-3" class="w-full h-full object-cover" src="" alt="Vue 3 de l'établissement"></div>
                 </div>
             </div>
 
@@ -606,9 +748,281 @@
 
     <!-- DATA ET LOGIQUE JAVASCRIPT -->
     <script>
-        // === BASE DE DONNÉES COMPLÈTE DU CATALOGUE (Issue du PDF) ===
+        // === BASE DE DONNÉES COMPLÈTE DU CATALOGUE ===
         const catalogData = [
-            // COMPLEXES HÔTELIERS
+            
+            // ================== NOUVELLES CHAMBRES ET SUITES ================== //
+
+            {
+                id: 'suite-standard', category: 'chambre', badge: 'Suite & Chambre', location: 'Baie',
+                title: 'Suite Standard (Vue Piscine)', price: '70.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1582719478250-c894e4dc240e?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Suite standard pour 2 personnes avec vue sur la piscine. Petit déjeuner offert.",
+                fullDesc: `
+                    <p>Idéal pour une escapade en duo avec un confort standard et vue apaisante.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Capacité :</strong> 2 personnes.</li>
+                        <li><strong>Vue :</strong> Vue sur la piscine.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, baby foot, balançoire.</li>
+                        <li><strong>Tarif :</strong> 70.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'chambre-baignoire', category: 'chambre', badge: 'Suite & Chambre', location: 'Baie',
+                title: 'Chambre Standard (Baignoire)', price: '60.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1582719478250-c894e4dc240e?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Chambre standard avec baignoire, vue avec balcon et mini réfrigérateur.",
+                fullDesc: `
+                    <p>Un confort cosy et intimiste avec une baignoire relaxante.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Équipements :</strong> Baignoire, vue avec balcon, mini réfrigérateur.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, baby foot, jeux de société.</li>
+                        <li><strong>Tarif :</strong> 60.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'suite-imperial', category: 'chambre', badge: 'Suite & Chambre', location: 'Baie',
+                title: 'Grande Suite Impériale', price: '90.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Grande suite pour 4 personnes avec vue panoramique et baignoire.",
+                fullDesc: `
+                    <p>L'espace idéal pour les petits groupes ou les familles cherchant une vue époustouflante.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Capacité :</strong> 4 personnes (possibilité de matelas supplémentaire à 10.000F).</li>
+                        <li><strong>Équipements :</strong> Vue panoramique, mini réfrigérateur, baignoire.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, baby foot, balançoire.</li>
+                        <li><strong>Tarif :</strong> 90.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'mini-suite', category: 'chambre', badge: 'Suite & Chambre', location: 'Baie',
+                title: 'Mini Suite (Vue Balcon)', price: '80.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1582719478250-c894e4dc240e?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Suite pour 2 personnes avec mini réfrigérateur et belle vue depuis le balcon.",
+                fullDesc: `
+                    <p>Un cocon romantique et fonctionnel pour vos séjours à deux.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Capacité :</strong> 2 personnes.</li>
+                        <li><strong>Équipements :</strong> Mini réfrigérateur, vue avec balcon / vue panoramique.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, baby foot, balançoire.</li>
+                        <li><strong>Tarif :</strong> 80.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'suite-familiale', category: 'chambre', badge: 'Suite & Chambre', location: 'Baie',
+                title: 'Suite Familiale (Lit Superposé)', price: '120.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Grande suite pour 5 personnes. Baignoire, terrasse, réfrigérateur et machine Nespresso.",
+                fullDesc: `
+                    <p>Conçue spécialement pour les familles nombreuses souhaitant partager de beaux moments.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Capacité :</strong> Jusqu'à 5 personnes (lits superposés inclus).</li>
+                        <li><strong>Équipements :</strong> Baignoire, terrasse, réfrigérateur, machine à Nespresso.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, volleyball, football, baby foot, billard.</li>
+                        <li><strong>Tarif :</strong> 120.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'suite-lac-baignoire', category: 'chambre', badge: 'Suite & Chambre', location: 'Bordure du Lac',
+                title: 'Suite Baignoire (Bordure Lac)', price: '100.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1551882547-ff40c0d128dc?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1574643033676-e1709422f2ba?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Suite relaxante en bordure du lac avec baignoire et réfrigérateur.",
+                fullDesc: `
+                    <p>Détendez-vous au rythme de l'eau avec cette suite pieds dans l'eau.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Équipements :</strong> Baignoire, réfrigérateur.</li>
+                        <li><strong>Localisation :</strong> En bordure directe du lac.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, pédalo.</li>
+                        <li><strong>Tarif :</strong> 100.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'suite-lac-jacuzzi', category: 'chambre', badge: 'Suite & Chambre', location: 'Bordure du Lac',
+                title: 'Suite Jacuzzi (Bordure Lac)', price: '120.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1574643033676-e1709422f2ba?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1551882547-ff40c0d128dc?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Le summum du luxe avec Jacuzzi privatif, vue balcon en plein sur le lac.",
+                fullDesc: `
+                    <p>Prenez votre bain à remous tout en admirant la beauté calme du lac.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Équipements :</strong> Jacuzzi, réfrigérateur, belle vue avec balcon.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, pédalo.</li>
+                        <li><strong>Tarif :</strong> 120.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'chambre-lac', category: 'chambre', badge: 'Suite & Chambre', location: 'Bordure du Lac',
+                title: 'Chambre Standard (Bordure Lac)', price: '60.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1551882547-ff40c0d128dc?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1505691938895-1758d7def511?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Chambre avec terrasse ou balcon face au lac. Réfrigérateur inclus.",
+                fullDesc: `
+                    <p>Le meilleur rapport qualité-prix pour s'endormir au bruit des clapotis.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Équipements :</strong> Réfrigérateur, terrasse ou balcon avec vue directe sur le lac.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, pédalo.</li>
+                        <li><strong>Tarif :</strong> 60.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'petite-chambre', category: 'chambre', badge: 'Suite & Chambre', location: 'Baie',
+                title: 'Petite Chambre Standard', price: '50.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1505691938895-1758d7def511?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1598928506311-c55dd1b31443?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1551882547-ff40c0d128dc?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Une chambre simple et efficace avec accès aux activités de la Baie.",
+                fullDesc: `
+                    <p>L'essentiel pour profiter des journées ensoleillées et d'une nuit paisible.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, jeux de société, babyfoot.</li>
+                        <li><strong>Tarif :</strong> 50.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'grande-chambre', category: 'chambre', badge: 'Suite & Chambre', location: 'Baie',
+                title: 'Grande Chambre Standard', price: '60.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1582719478250-c894e4dc240e?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Plus d'espace qu'une chambre standard, idéale pour rajouter un couchage.",
+                fullDesc: `
+                    <p>Spacieuse et lumineuse, pour un séjour confortable.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Bonus :</strong> Possibilité de rajouter un matelas supplémentaire.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, baby foot, volleyball.</li>
+                        <li><strong>Tarif :</strong> 60.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'suite-coconut', category: 'chambre', badge: 'Suite & Chambre', location: 'Coconut Groove',
+                title: 'Suite / Coconut Groove', price: '110.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1587985864115-f5b24479de20?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Suite exclusive située au cœur du complexe naturel Coconut Groove Lodge.",
+                fullDesc: `
+                    <p>Un hébergement premium en pleine nature dans le célèbre lodge.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Cadre :</strong> Entourée de nature luxuriante et proche du parc animalier.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Tarif :</strong> 110.000F CFA / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'suite-lagune', category: 'chambre', badge: 'Suite & Chambre', location: 'Bordure Lagune',
+                title: 'Suite Spacieuse (Lagune)', price: '90.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1560067174-c5a3a8f37060?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Grande suite pour la famille (5 pers). Baignoire, terrasse face à la lagune.",
+                fullDesc: `
+                    <p>Évasion et grands espaces en bordure directe de lagune.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Capacité :</strong> 5 personnes.</li>
+                        <li><strong>Équipements :</strong> Baignoire, terrasse aménagée, réfrigérateur.</li>
+                        <li><strong>Activités gratuites :</strong> Piscine, canoë, volleyball, football, baby foot, billard.</li>
+                        <li><strong>Tarif :</strong> 90.000F CFA TTC / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'chambre-valdes', category: 'chambre', badge: 'Suite & Chambre', location: 'Chez Valdez',
+                title: 'Chambre Standard (Chez Valdes)', price: '40.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1618773928121-c32242fa9166?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Chambre standard avec eau chaude, Canal TV, en bordure de lagune.",
+                fullDesc: `
+                    <p>Idéalement située au sein du célèbre complexe L'Escale de la Baie Chez Valdez.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Équipements :</strong> Eau de chauffage, Canal TV.</li>
+                        <li><strong>Inclus :</strong> Petit déjeuner offert.</li>
+                        <li><strong>Localisation :</strong> Bordure de lagune.</li>
+                        <li><strong>Tarif :</strong> 40.000F CFA / séjour 24H.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'chambre-simple', category: 'chambre', badge: 'Suite & Chambre', location: 'Baie',
+                title: 'Chambre Simple (Piscine)', price: '35.000F / 24H',
+                images: [
+                    'https://images.unsplash.com/photo-1598928506311-c55dd1b31443?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1505691938895-1758d7def511?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1551882547-ff40c0d128dc?auto=format&fit=crop&w=800&q=80'
+                ],
+                shortDesc: "Modeste chambre avec accès à la piscine. Parfait pour les petits budgets.",
+                fullDesc: `
+                    <p>Profitez du cadre de la Baie à petit prix tout en ayant accès à la piscine.</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-4">
+                        <li><strong>Description :</strong> Chambre modeste et propre.</li>
+                        <li><strong>Inclus :</strong> Accès piscine et Petit déjeuner offert.</li>
+                        <li><strong>Tarif :</strong> 35.000F CFA / 24H.</li>
+                    </ul>
+                `
+            },
+
+
+            // ================== COMPLEXES HÔTELIERS ================== //
             {
                 id: 'mario', category: 'complexe', badge: 'Complexe Hôtelier', location: 'Lac Bakré',
                 title: 'Auberge Chez Mario', price: 'Dès 50.000F / 24H',
@@ -775,7 +1189,7 @@
                 `
             },
 
-            // VILLAS PRIVÉES
+            // ================== VILLAS PRIVÉES ================== //
             {
                 id: 'villastandard', category: 'villa-baie', badge: 'Villa Privée', location: 'Baie',
                 title: 'Villa Standard (2 Chambres)', price: '135.000F / Jour',
@@ -1087,7 +1501,7 @@
                 `
             },
 
-            // ASSINIE / BASSAM / ABIDJAN
+            // ================== ASSINIE / BASSAM / ABIDJAN ================== //
             {
                 id: 'chaletlisbon', category: 'villa-autre', badge: 'Assinie', location: 'Assinie',
                 title: 'Luxury Chalet Lisbon', price: '450.000F / 24h',
@@ -1435,15 +1849,19 @@
             const message = document.getElementById('message').value.trim();
 
             const dateObj = new Date(date);
-            const formattedDate = dateObj.toLocaleDateString('fr-FR', {
-                day: '2-digit', month: '2-digit', year: 'numeric'
-            });
+            let formattedDate = date; // Fallback par défaut
+
+            if (!isNaN(dateObj)) {
+                formattedDate = dateObj.toLocaleDateString('fr-FR', {
+                    day: '2-digit', month: '2-digit', year: 'numeric'
+                });
+            }
 
             let whatsappText = `*🎫 NOUVELLE RÉSERVATION* \n\n`;
             whatsappText += `👤 *Client :* ${nom.toUpperCase()} ${prenoms}\n`;
             whatsappText += `✨ *Service demandé :* ${service}\n`;
             if (lieu) {
-                whatsappText += `🏨 *Établissement/Villa :* ${lieu}\n`;
+                whatsappText += `🏨 *Établissement/Activité :* ${lieu}\n`;
             }
             whatsappText += `📅 *Date prévue :* ${formattedDate}\n`;
             
